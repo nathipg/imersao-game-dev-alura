@@ -1,30 +1,27 @@
 class Personagem {
 
-    constructor(imagem) {
+    constructor(imagem, dimMap, escala) {
+        this.dimMap = dimMap;
+        this.escala = escala;
+
         this.imagem = imagem;
-        this.matriz = [
-            [0, 0],
-            [202, 0],
-            [440, 0],
-            [660, 0],
-            [0, 270],
-            [202, 270],
-            [440, 270],
-            [660, 270],
-            [0, 540],
-            [202, 540],
-            [440, 540],
-            [660, 540],
-            [0, 810],
-            [202, 810],
-            [440, 810],
-            [660, 810],
-        ];
+        this.matriz = [];
+
+        for(let j = 0; j < this.dimMap.colunas; j++) {
+            for(let i = 0; i < this.dimMap.linhas; i++) {
+            
+                this.matriz.push([
+                    i * this.dimMap.largura,
+                    j * this.dimMap.altura
+                ]);
+            }
+        }
+
         this.frameAtual = 0;
     }
 
     exibe() {
-        image(this.imagem, 0, height - 135, 110, 135, this.matriz[this.frameAtual][0], this.matriz[this.frameAtual][1], 220, 270);
+        image(this.imagem, 0, height - this.dimMap.altura * this.escala, this.dimMap.largura * this.escala, this.dimMap.altura * this.escala, this.matriz[this.frameAtual][0], this.matriz[this.frameAtual][1], this.dimMap.largura, this.dimMap.altura);
         this.anima();
     }
 
@@ -34,8 +31,6 @@ class Personagem {
         if(this.frameAtual >= this.matriz.length) {
             this.frameAtual = 0;
         }
-
-        console.log(this.frameAtual);
     }
 
 }

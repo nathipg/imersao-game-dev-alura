@@ -13,7 +13,12 @@ function preload() {
 function setup() {
     createCanvas(windowWidth, windowHeight);
     cenario = new Cenario(imagemCenario, 3);
-    personagem = new Personagem(imagemPersonagem);
+    personagem = new Personagem(imagemPersonagem, {
+        largura: 220,
+        altura: 270,
+        linhas: 4,
+        colunas: 4
+    }, 0.5);
     frameRate(30);
     somJogo.loop();
 }
